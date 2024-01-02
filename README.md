@@ -42,6 +42,25 @@ The files on those directories must have been previously added by the user.
 
 The goal of this directory structure is to keep shell configuration organized.
 
+## USAGE
+
+Copy the files to a folder:
+
+```shell
+mkdir ~/.config && cd ~/.config
+git clone https://github.com/uwla/shelf shell && cd shell
+```
+
+Then, source the main `profile` in your `.zshrc` or `.bashrc`:
+
+```shell
+. ~/.config/shell/profile
+```
+
+Now,  instead  of  configuring  `.bash_aliases`  or  `.zshrc`,  you  can  modify
+`~/.config/shell/aliases` to configure aliases for any  POSIX  shell.  The  same
+goes for other configurations.
+
 ## CONTRIBUTING
 
 Contributions are welcome. 
