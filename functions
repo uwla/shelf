@@ -1,0 +1,204 @@
+#!/bin/sh
+
+#############################
+##     SHELL FUNCTIONS     ##
+#############################
+
+# append directory to path if not included already
+path_append()
+{
+  while [ -n "${1}" ]; do
+    dir=$1
+    if [[ -d "${dir}"  ]] && [[ ":${PATH}:" != *":${dir}:"*  ]]; then
+      export PATH="${PATH}:${dir}"
+    fi
+    shift
+  done
+}
+
+# prepend directory to path if not included already
+path_prepend()
+{
+  while [ -n "${1}" ]; do
+    dir=$1
+    if [[ -d "${dir}"  ]] && [[ ":${PATH}:" != *":${dir}:"*  ]]; then
+      export PATH="${dir}:${PATH}"
+    fi
+    shift
+  done
+}
+
+# utility to add, edit, view, or sync shell aliases
+aliases()
+{
+  file=${XDG_CONFIG_HOME}/shell/aliases
+  case "$1" in
+    edit | -e) $EDITOR "${file}" ;;
+    path | -p) echo "${file}" ;;
+    sync | -s) source "${file}" ;;
+    *)
+      if [ -z $1 ]; then
+        alias | sort -i
+      else
+        alias | grep -i -P "$1"
+      fi
+      ;;
+  esac
+}
+
+# utility to edit, view, or sync shell profile
+profile()
+{
+  file=${XDG_CONFIG_HOME}/shell/profile
+  case "$1" in
+    edit|-e) $EDITOR "${file}" ;;
+    path|-p) echo "${file}" ;;
+    sync|-s) . "${file}" ;;
+    *) $PAGER "${file}" ;;
+  esac
+}
+
+# utility to edit, view, or sync shell functions
+userfunctions()
+{
+  file=${XDG_CONFIG_HOME}/shell/functions
+  case "$1" in
+    edit|-e) $EDITOR "${file}" ;;
+    path|-p) echo "${file}" ;;
+    sync|-s) . "${file}" ;;
+    *) $PAGER "${file}" ;;
+  esac
+}
+
+# safely source the given file
+safe_source()
+{
+  while [ -n "$1" ]; do
+    file=$1
+    if [ -f "${file}" ]; then
+      . "${file}"
+    fi
+    shift
+  done
+}
+
+# utility to edit, view, or sync shell history
+hist()
+{
+  file=${HISTFILE}
+  case "$1" in
+    edit | -e) $EDITOR "${file}" ;;
+    path | -p) echo "${file}" ;;
+    *)
+      if [ -z "$1" ]; then
+        $PAGER "${file}"
+      else
+        grep -i -P "$1" < "${file}"
+      fi
+      ;;
+  esac
+}
+
+# print line separator
+line_separator()
+{
+  columns=${COLUMNS:-80}
+  for _ in $(seq 1 "${columns}"); do
+    printf '-'
+  done
+  printf '\n'
+}
+
+# utility to edit, view, or syn environment variables
+envvars()
+{
+  env_file=${XDG_CONFIG_HOME}/shell/env
+  case "$1" in
+    edit | -e) $EDITOR "${env_file}" ;;
+    file | -f) echo "${env_file}" ;;
+    sync | -s) source "${env_file}" ;;
+    view | -v) $PAGER "${env_file}" ;;
+    *)
+      if [ -z $1 ]; then
+        env | sort -i
+      else
+        env | grep -i -P "$1" | sort -i
+      fi
+      ;;
+  esac
+}
+
+# ------------------------------------------------------------------------------
+# SHELL UTILITIES
+
+# Go back to the parent directory n times
+up()
+{
+  number="${1:-1}"
+  for i in $(seq $number); do
+    cd ..
+  done
+  return 0
+}
+
+# Make a directory and cd into it
+mkcd()
+{
+  mkdir -p "$1" && cd "$1"
+}
+
+extract()
+{
+  [ ! -f "${1}" ] && echo "No such file: ${1}" && return 1
+  case "${1}" in
+    *.tar.bz2) tar xvjf "${1}"   ;;
+    *.tar.gz)  tar xvzf "${1}"   ;;
+    *.bz2)     bunzip2 "${1}"    ;;
+    *.rar)     unrar x "${1}"    ;;
+    *.gz)      gunzip "${1}"     ;;
+    *.tar)     tar xvf "${1}"    ;;
+    *.tbz2)    tar xvjf "${1}"   ;;
+    *.tgz)     tar xvzf "${1}"   ;;
+    *.zip)     unzip "${1}"      ;;
+    *.Z)       uncompress "${1}" ;;
+    *.7z)      7z x "${1}"       ;;
+    *)        echo "Cannot extract it";;
+  esac
+}
+
+# execute ranger and cd into the last directory after it finished.
+ranger()
+{
+  local IFS=$'\t\n'
+  local tempfile="$(mktemp -t tmp.XXXXXX)"
+
+  command ranger --cmd="map q chain shell echo %d > \"${tempfile}\"; quitall" "$@"
+
+  if [ -f "${tempfile}" ] && [ "$(head -n 1 "${tempfile}")" != "$(pwd)" ]; then
+    destdir=$(head -n1 "${tempfile}")
+    cd "${destdir}" || return
+  fi
+
+  rm -f -- "${tempfile}" 2>/dev/null
+}
+
+# run command and pass its output to less
+fit()
+{
+  "$@" | /bin/less -S
+}
+
+# plot graphics
+iplot()
+{
+  cat <<EOF | gnuplot
+  set terminal pngcairo enhanced font 'Fira Sans,10'
+  set autoscale
+  set samples 1000
+  set output '|kitty +kitten icat --stdin yes'
+  set object 1 rectangle from screen 0,0 to screen 1,1 fillcolor rgb"#fdf6e3" behind
+  plot $@
+  set output '/dev/null'
+  EOF
+}
+

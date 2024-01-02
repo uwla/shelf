@@ -1,0 +1,10 @@
+#!/bin/sh
+
+# ------------------------------------------------------------------------------
+# PRIVATE ENVIRONMENT VARIABLES
+# ------------------------------------------------------------------------------
+#
+# Sample file with private env variables.
+# It should not be tracked or backedup with other dotfiles.
+
+export OPENAI_API_KEY=

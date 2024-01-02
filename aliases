@@ -1,0 +1,114 @@
+#!/bin/sh
+
+# ------------------------------------------------------------------------------
+# SHELL ALIASES
+# ------------------------------------------------------------------------------
+
+# shortcuts
+
+alias a='aliases'
+alias e='envvars'
+alias f='userfunctions'
+alias p='profile'
+alias q='exit'
+alias t='touch'
+alias v='vim'
+
+# files (using ls)
+
+alias ls='LC_ALL=C ls'
+alias l1='LC_ALL=C ls -1 --color --group-directories-first'
+alias ll='LC_ALL=C ls -lh --color --group-directories-first'
+alias la='LC_ALL=C ls -lah --color --group-directories-first'
+
+# files (using exa)
+
+# alias ls='exa'
+# alias lr='exa -R'
+# alias ll='exa --icons -lhgH --group-directories-first'
+# alias la='exa --icons -lhgH --group-directories-first --all'
+# alias lar='exa --icons -lhgH --group-directories-first --all -R'
+
+# clipboard on x11
+
+alias  xcopy='xclip -selection clipboard'
+alias xpaste='xclip -selection clipboard -out'
+
+# git
+
+alias g='git'
+alias ga='git add'
+alias ga.='git add .'
+alias gb='git branch'
+alias gc='git commit'
+alias gca='git commit --amend'
+alias gcan='git commit --amend --no-edit'
+alias gC='git clone'
+alias gd='git diff'
+alias gs='git status --short'
+alias gk='git checkout'
+alias gl='git log --oneline'
+alias gg='git log --oneline --graph --full-history --all'
+alias grc='git rebase --continue'
+
+# docker
+
+alias dk='docker'
+alias dke='docker exec'
+alias dkei='docker exec -it'
+alias dkeir='docker exec -it -u root'
+alias dker='docker exec -u root'
+alias dkps='docker ps | sed -e "s;/\(tcp\|udp\);;g" -e "s;0.0.0.0:;;g" -e "s;:::;;g" -e "s;->;:;g" -e "s;,;;g"'
+
+# docker compose
+
+alias dup='docker compose up -d'
+alias ddown='docker compose down'
+
+# laravel
+
+alias  pa='php artisan'
+alias pam='php artisan migrate'
+alias par='php artisan route:list'
+alias tinker='php artisan tinker'
+
+# npm
+
+alias naudit='npm audit'
+alias nauditf='npm audit fix'
+alias npublish='npm publish'
+alias ninstall='npm install'
+alias ni='npm install'
+
+# npm scripts
+
+alias nbuild='npm run build'
+alias ndev='npm run dev'
+alias ndev-js='npm run dev-js'
+alias ndev-css='npm run dev-css'
+alias nprod='npm run prod'
+alias nprod-js='npm run prod-js'
+alias nprod-css='npm run prod-css'
+alias nrun='npm run'
+alias ntest='npm run test'
+alias nserve='npm run serve'
+alias nwatch='npm run watch'
+alias nwatch-js='npm run watch-js'
+alias nwatch-css='npm run watch-css'
+
+# python
+
+alias py='python'
+alias ra='ranger'
+
+# yay
+
+alias yQ='yay -Qeq'
+alias ys='yay -Ss'
+alias yS='yay -S'
+alias yr='yay -Rsn'
+alias yy='yay -Syu'
+
+# mixed
+alias u2='umask 022'
+alias myip='curl -s https://api.ipify.org'
