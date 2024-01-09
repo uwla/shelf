@@ -48,7 +48,7 @@ Copy the files to a folder:
 
 ```shell
 mkdir ~/.config && cd ~/.config
-git clone https://github.com/uwla/shelf shell && cd shell
+git clone https://github.com/uwla/shelf shell
 ```
 
 Then, source the main `profile` in your `.zshrc` or `.bashrc`:
@@ -57,9 +57,22 @@ Then, source the main `profile` in your `.zshrc` or `.bashrc`:
 . ~/.config/shell/profile
 ```
 
+You could also create symlinks:
+
+```
+ln -s ~/.config/shell/profile ~/.bashrc
+```
+
 Now,  instead  of  configuring  `.bash_aliases`  or  `.zshrc`,  you  can  modify
 `~/.config/shell/aliases` to configure aliases for any  POSIX  shell.  The  same
 goes for other configurations.
+
+## ABOUT
+
+I made this minimalistic shell framework because I was asked repeated  times  to
+share my shell configuration files. I did not want to direcly share my dot files
+due to private configuration, so I made a few adjustments in order  to  make  it
+sharable, and turned it into reusable code for those interesed in it.
 
 ## CONTRIBUTING
 
