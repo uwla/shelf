@@ -147,6 +147,21 @@ mkcd()
   mkdir -p "$1" && cd "$1"
 }
 
+# git wrapper
+git()
+{
+  # clone repo and cd into it
+  if [ "$1" = 'clonecd' ]; then
+    shift
+    command git clone $@ && cd "$(basename "$_" .git)"
+    return
+  fi
+
+  # pass args to git
+  command git "$@"
+}
+
+# extract files from archive
 extract()
 {
   [ ! -f "${1}" ] && echo "No such file: ${1}" && return 1
