@@ -5,6 +5,6 @@
 # ------------------------------------------------------------------------------
 #
 # Private shell aliases should be here.
-# These include specific aliases that should not be shared accross machines.
+# These include specific aliases that should not be shared across machines.
 
 alias foo='echo foo'
