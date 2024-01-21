@@ -12,7 +12,7 @@ It splits related shell configurations in files:
 - `aliases`: custom shell aliases.
 - `plugins/`: directory with shell-specific plugins.
 - `completion/`: directory with shell-specific completions.
-- `keybidings/`: directory with shell-specific keybidings.
+- `keybindings/`: directory with shell-specific keybindings.
 - `private/`: private user configuration.
 
 The `profile` script runs first and loads other script in the  following  order:
@@ -20,7 +20,7 @@ The `profile` script runs first and loads other script in the  following  order:
 the `private/` directory (these ones should not be tracked  by  version  control
 systems). After having figured out the current shell (`bash`, `sh`,  or  `zsh`),
 it  loads  scripts  specific  to  that  shell   located   in   the   directories
-`completion/`, `keybidings/`, and `plugins/`.
+`completion/`, `keybindings/`, and `plugins/`.
 
 For example, if shell is `bash`, it could load:
 
@@ -64,8 +64,8 @@ ln -s ~/.config/shell/profile ~/.bashrc
 ```
 
 Now,  instead  of  configuring  `.bash_aliases`  or  `.zshrc`,  you  can  modify
-`~/.config/shell/aliases` to configure aliases for any  POSIX  shell.  The  same
-goes for other configurations.
+`~/.config/shell/aliases` to configure aliases for any shell. The same goes  for
+other configurations.
 
 ## ABOUT
 
@@ -76,7 +76,7 @@ sharable, and turned it into reusable code for those interesed in it.
 
 ## CONTRIBUTING
 
-Contributions are welcome. 
+Contributions are welcome.
 
 ## LICENSE
 
