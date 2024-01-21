@@ -28,10 +28,10 @@ source_files $SHELL_CONFIG/{login,env,aliases,functions}
 source_files $SHELL_CONFIG/private/*
 
 # load system bin directories from specific programming language packages
-path_append /usr/bin/vendor_perl
+path_append /usr/bin/vendor_perl ~/.local/share/python/bin ~/.local/share/npm/bin
 
-# load local bin and local scripts
-path_prepend ~/.local/bin ~/.local/binsh
+# load local bin
+path_prepend ~/.local/bin
 
 # source custom shell completion, keybindings, and plugins
 source_files $SHELL_CONFIG/{keybindings,completion,plugins}/*.$shell

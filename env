@@ -68,8 +68,8 @@ export ANSIBLE_GALAXY_CACHE_DIR=${XDG_CACHE_HOME}/ansible
 
 # aspell
 ASPELL_CONF="per-conf ${XDG_CONFIG_HOME}/aspell/aspell.conf; "
-ASPELL_CONF+="personal ${XDG_CONFIG_HOME}/aspell/en.pws; "
-ASPELL_CONF+="repl ${XDG_CONFIG_HOME}/aspell/en.prepl"
+ASPELL_CONF="${ASPELL_CONF} personal ${XDG_CONFIG_HOME}/aspell/en.pws; "
+ASPELL_CONF="${ASPELL_CONF} repl ${XDG_CONFIG_HOME}/aspell/en.prepl"
 export ASPELL_CONF
 
 # asymptote graphics

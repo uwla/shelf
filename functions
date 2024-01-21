@@ -37,7 +37,7 @@ aliases()
     path | -p) echo "${file}" ;;
     sync | -s) source "${file}" ;;
     *)
-      if [ -z $1 ]; then
+      if [ -z "$1" ]; then
         alias | sort -i
       else
         alias | grep -i -P "$1"
@@ -119,7 +119,7 @@ envvars()
     sync | -s) source "${env_file}" ;;
     view | -v) $PAGER "${env_file}" ;;
     *)
-      if [ -z $1 ]; then
+      if [ -z "$1" ]; then
         env | sort -i
       else
         env | grep -i -P "$1" | sort -i
@@ -135,7 +135,7 @@ envvars()
 up()
 {
   number="${1:-1}"
-  for i in $(seq $number); do
+  for _ in $(seq "$number"); do
     cd ..
   done
   return 0
@@ -150,10 +150,11 @@ mkcd()
 # git wrapper
 git()
 {
+
   # clone repo and cd into it
   if [ "$1" = 'clonecd' ]; then
     shift
-    command git clone $@ && cd "$(basename "$_" .git)"
+    command git clone "$@" && cd "$(basename "$_" .git)"
     return
   fi
 
@@ -184,8 +185,8 @@ extract()
 # execute ranger and cd into the last directory after it finished.
 ranger()
 {
-  local IFS=$'\t\n'
-  local tempfile="$(mktemp -t tmp.XXXXXX)"
+  IFS=$'\t\n'
+  tempfile="$(mktemp -t tmp.XXXXXX)"
 
   command ranger --cmd="map q chain shell echo %d > \"${tempfile}\"; quitall" "$@"
 
@@ -214,6 +215,6 @@ iplot()
   set object 1 rectangle from screen 0,0 to screen 1,1 fillcolor rgb"#fdf6e3" behind
   plot $@
   set output '/dev/null'
-  EOF
+EOF
 }
 
