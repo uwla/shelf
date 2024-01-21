@@ -70,18 +70,6 @@ userfunctions()
   esac
 }
 
-# safely source the given file
-safe_source()
-{
-  while [ -n "$1" ]; do
-    file=$1
-    if [ -f "${file}" ]; then
-      . "${file}"
-    fi
-    shift
-  done
-}
-
 # utility to edit, view, or sync shell history
 hist()
 {
