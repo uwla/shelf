@@ -1,0 +1,13 @@
+{
+    "shellformat.useEditorConfig": true,
+    "shellcheck.exclude": [],
+    "files.associations": {
+        "aliases": "shellscript",
+        "env": "shellscript",
+        "functions": "shellscript",
+        "login": "shellscript",
+        "profile": "shellscript",
+        "sample_aliases": "shellscript",
+        "sample_env": "shellscript"
+    }
+}
