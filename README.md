@@ -1,6 +1,6 @@
 # SHELF (SHELL FRAMEWORK)
 
-Shelf is a minimalistic shell framework to share configuration accross  diferent
+Shelf is a minimalistic shell framework to share configuration across  different
 shells (`bash`, `sh`, `zsh`, and possibly others) in a organized manner.
 
 It splits related shell configurations in files:
@@ -59,7 +59,7 @@ Then, source the main `profile` in your `.zshrc` or `.bashrc`:
 
 You could also create symlinks:
 
-```
+```shell
 ln -s ~/.config/shell/profile ~/.bashrc
 ```
 
@@ -70,9 +70,9 @@ other configurations.
 ## ABOUT
 
 I made this minimalistic shell framework because I was asked repeated  times  to
-share my shell configuration files. I did not want to direcly share my dot files
+share my shell configuration files. I did not want to directly share my dot files
 due to private configuration, so I made a few adjustments in order  to  make  it
-sharable, and turned it into reusable code for those interesed in it.
+sharable, and turned it into reusable code for those interested in it.
 
 ## CONTRIBUTING
 
